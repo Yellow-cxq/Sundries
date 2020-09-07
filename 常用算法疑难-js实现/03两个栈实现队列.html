@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>两个栈实现队列</title>
+</head>
+<body>
+    
+</body>
+<script>
+    let stack1 = [] //入队操作
+    let stack2 = [] //出队操作
+
+    function push (node) {
+        //往栈1里面push元素即可
+        stack1.push(node)
+    }
+
+    function pop () {
+        //将栈1的元素移动到栈2 负负得正模仿队列
+        while (stack1.length) {
+            stack2.push(stack1.pop())
+        }
+        //将栈2顶端的数据出栈
+        let popVal = stack2.pop()
+        //将栈2的数据移动到栈1中 恢复数据
+        while(stack2.length) {
+            stack1.push(stack2.pop())
+        }
+        return popVal
+    }
+
+    push(1)
+    push(2)
+    push(3)
+    push(4)
+    push(5)
+    console.log(pop())
+    push(6)
+    console.log(pop())
+    console.log(pop())
+</script>
+</html>

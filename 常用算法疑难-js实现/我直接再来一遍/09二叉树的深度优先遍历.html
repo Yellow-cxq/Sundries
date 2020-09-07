@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>二叉树的深度优先遍历</title>
+</head>
+<body>
+    
+</body>
+<script>
+    function TreeNode (val) {
+        this.val = val
+        this.left = null
+        this.right = null
+    }
+
+    function createTree_preOrder (preOrderArr) {
+        let root = null
+        let nodeVal
+        if(preOrderArr[0] !== undefined) {
+            nodeVal = preOrderArr.shift()
+            if(nodeVal !== '#') {
+                root = new TreeNode(nodeVal)
+                root.left = createTree_preOrder (preOrderArr)
+                root.right = createTree_preOrder (preOrderArr)
+            }
+        }
+        return root
+    }
+    let preOrderArr = ['a', 'b', 'd', '#', 'f', '#', '#', '#', 'c', '#', 'e', '#', '#']
+    let tree = createTree_preOrder(preOrderArr)
+    console.log(tree)
+
+    //先序遍历
+    function preOrderTraversval (tree,ans) {
+        //根左右
+        if (tree) {
+            ans.push(tree.val)
+            preOrderTraversval (tree.left,ans)
+            preOrderTraversval (tree.right,ans)
+        } else {
+            ans.push('#')
+        }
+    }
+    let ans = []
+    preOrderTraversval(tree,ans)
+    console.log(ans)
+
+    //中序遍历
+    function inOrderTraversal (tree,ans) {
+        if (tree) {
+            inOrderTraversal (tree.left,ans)
+            ans.push(tree.val)
+            inOrderTraversal (tree.right,ans)
+        } else {
+            ans.push('#')
+        }
+    }
+    ans = []
+    inOrderTraversal(tree,ans)
+    console.log(ans)
+
+    //后序遍历
+    function postOrderTraversal (tree,ans) {
+        if(tree) {
+            postOrderTraversal(tree.left,ans)
+            postOrderTraversal(tree.right,ans)
+            ans.push(tree.val)
+        } else {
+            ans.push('#')
+        }
+    }
+    ans = []
+    postOrderTraversal(tree,ans)
+    console.log(ans)
+</script>
+</html>

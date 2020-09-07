@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>重建二叉树</title>
+</head>
+<body>
+    
+</body>
+<script>
+    //根据二叉树前序和中序遍历的结果，重建二叉树
+    function TreeNode (val) {
+        this.val = val
+        this.left = null
+        this.right = null
+    }
+
+    function rebuildTree (qianXu,zhongXu) {
+        if(qianXu[0] !== undefined) {
+            let rootVal = qianXu[0]
+            let index = zhongXu.indexOf(rootVal)
+            let leftTree =  rebuildTree(qianXu.slice(1,index+1),zhongXu.slice(0,index))
+            let rightTree = rebuildTree(qianXu.slice(index+1),zhongXu.slice(index+1))
+            let root = new TreeNode(rootVal)
+            root.left = leftTree
+            root.right = rightTree
+            return root
+        }
+    }
+
+    let qianXu = [1, 2, 4, 7, 3, 5, 6, 8]
+    let zhongXu = [4, 7, 2, 1, 5, 3, 8, 6]
+    console.log(rebuildTree(qianXu, zhongXu))
+    
+</script>
+</html>

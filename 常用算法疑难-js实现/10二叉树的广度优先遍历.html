@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>二叉树的广度优先遍历--层次遍历</title>
+</head>
+<body>
+    
+</body>
+<script>
+    function TreeNode (val) {
+        this.val = val
+        this.left = null
+        this.right = null
+    }
+
+    function createTree_preOrder (preOrderArr) {
+        let root = null
+        if(preOrderArr[0] !== undefined) {
+            let nodeVal = preOrderArr.shift()
+            if(nodeVal != '#') {
+                root = new TreeNode(nodeVal)
+                root.left = createTree_preOrder (preOrderArr)
+                root.right = createTree_preOrder (preOrderArr)
+            }
+        }
+        return root
+    }
+    let preOrderArr = ['a', 'b', 'd', '#', 'f', '#', '#', '#', 'c', '#', 'e', '#', '#']
+    let tree = createTree_preOrder(preOrderArr)
+    console.log(tree)
+
+    //二叉树的广度优先遍历---层次遍历
+    //使用队列
+    //步骤：1.访问到根节点，并且把它加入到队列中  2.循环的将队列队首的元素出队，把和出队元素相关的元素加入到队列中(循环一直到队列为空)
+    //注意：叶子节点不用加入到队列中
+
+    function levelOrderTraversal (tree,ans) {
+        let queue = []
+        if(tree) { //不为空
+           ans.push(tree.val) //在入队之前访问，因为#不会入队，在入队之后访问，访问不到
+           queue.push(tree) 
+        }
+        while(queue.length) {
+            let head = queue.shift()
+            let left = head.left
+            if (left) { //不为叶子节点
+                ans.push(left.val)
+                queue.push(left)
+            } else { //是叶子节点
+                ans.push('#')
+            }
+            let right = head.right
+            if (right) { //不为叶子节点
+                ans.push(right.val)
+                queue.push(right)
+            } else { //是叶子节点
+                ans.push('#')
+            }
+        }
+    }
+
+    let ans = []
+    levelOrderTraversal(tree,ans)
+    console.log(ans);
+</script>
+</html>

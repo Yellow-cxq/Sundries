@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>二叉树的创建-层次遍历</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    function TreeNode(val) {
+        this.val = val
+        this.left = null
+        this.right = null
+    }
+
+    function createTree_levelOrder(levelOrderArr) {
+        //使用队列实现
+        let queue = []
+        let root = null
+        let nodeVal
+        if (levelOrderArr[0] !== undefined) {
+            nodeVal = levelOrderArr.shift()  //这里注意不能用levelOrderArr[0]
+            root = new TreeNode(nodeVal)
+            queue.push(root)
+            while (queue.length) {
+                let head = queue.shift()
+                nodeVal = levelOrderArr.shift()
+                if (nodeVal !== '#') {
+                    head.left = new TreeNode(nodeVal)
+                    queue.push(head.left)
+                }
+                nodeVal = levelOrderArr.shift()
+                if (nodeVal !== '#') {
+                    head.right = new TreeNode(nodeVal)
+                    queue.push(head.right)
+                }
+            }
+        }
+        return root
+    }
+    let levelOrderArr = ['a', 'b', 'c', 'd', '#', '#', 'e', '#', 'f', '#', '#', '#', '#']
+    let tree = createTree_levelOrder(levelOrderArr)
+    console.log(tree)
+</script>
+
+</html>

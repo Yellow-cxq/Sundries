@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>反转链表</title>
+</head>
+<body>
+    
+</body>
+<script>
+    //创建链表---使用构造函数
+    function List (node) {
+        this.val = node
+        this.next = null
+    }
+
+    //创建
+    function createList (arr) {
+        let head = new List(arr[0])
+        let tail = head
+       for(let i = 1; i < arr.length; i++) {
+           tail.next = new List(arr[i])
+           tail = tail.next
+       }
+        return head
+    }
+
+    let list = createList([1,2,3,4,5])
+    //console.log(list)
+
+    //反转
+    function resverseList (head) {
+        //遍历链表，将链表里面的值都拿下来，存在数组里面
+        let p = head
+        let arr = []
+        while(p) {
+            arr.push(p.val)
+            p = p.next
+        }
+        //再次遍历链表，将数组里面的值倒序地赋值给每一个节点的val域实现链表的反转
+        p = head
+        while(p) {
+            p.val = arr.pop()
+            p = p.next
+        }
+        return head
+    }
+    console.log(resverseList(list));
+</script>
+</html>

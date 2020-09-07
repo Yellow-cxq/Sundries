@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>反转链表</title>
+</head>
+<body>
+    
+</body>
+<script>
+    function List(val) {
+        this.val = val
+        this.next = null
+    }
+    
+   function createList (arr) {
+       let head = new List(arr[0])
+       let tail = head
+       for(let i = 1; i < arr.length; i++) {
+          tail.next = new List(arr[i])
+          tail = tail.next
+       }
+       return head
+   }
+
+    function reverseList (head) {
+        let arr = []
+        let p = head
+        while(p) {
+            arr.push(p.val)
+            p = p.next
+        }
+        p = head //记得重置指针
+        while(p) {
+            p.val = arr.pop()
+            p = p.next
+        }
+        return head
+    }
+    let arr = [1,2,3,4,5]
+    let head = createList(arr)
+    console.log(reverseList(head))
+</script>
+</html>

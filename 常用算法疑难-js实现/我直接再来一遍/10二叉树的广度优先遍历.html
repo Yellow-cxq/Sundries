@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>二叉树的广度优先遍历--层次遍历</title>
+</head>
+<body>
+    
+</body>
+<script>
+    function TreeNode (val) {
+        this.val = val
+        this.left = null
+        this.right = null
+    }
+
+    function createTree_preOrder (preOrderArr) {
+        let root = null
+        let nodeVal
+        if (preOrderArr[0] !== undefined) {
+            nodeVal = preOrderArr.shift()
+            if (nodeVal !== '#') {
+                root = new TreeNode(nodeVal)
+                root.left = createTree_preOrder (preOrderArr)
+                root.right = createTree_preOrder (preOrderArr)
+            }
+        }
+        return root
+    }
+    let preOrderArr = ['a', 'b', 'd', '#', 'f', '#', '#', '#', 'c', '#', 'e', '#', '#']
+    let tree = createTree_preOrder(preOrderArr)
+    console.log(tree)
+
+    function levelOrderTraversal (tree,ans) {
+        //使用队列
+        let queue = []
+        if (tree) {
+            ans.push(tree.val)
+            queue.push(tree)
+        }
+        while (queue.length) {
+                let head = queue.shift()
+                let left = head.left
+                if (left) {
+                    ans.push(left.val)
+                    queue.push(left)
+                } else {
+                    ans.push('#')
+                }
+               let right = head.right
+                if (right) {
+                    ans.push(right.val)
+                    queue.push(right)
+                } else {
+                    ans.push('#')
+                }
+            }
+    }
+    let ans = []
+    levelOrderTraversal(tree,ans)
+    console.log(ans)
+</script>
+</html>

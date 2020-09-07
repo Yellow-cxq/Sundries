@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>记忆化递归--跳台阶</title>
+</head>
+<body>
+    
+</body>
+<script>
+    //f(n) = f(n-1) + f(n-2)
+    let cache = [,1,2]
+    function jump (n) {
+        if(cache[n] !== undefined) return cache[n]
+        return cache[n] = jump(n-1) + jump(n-2)
+    }
+    console.log(jump(3))
+    console.log(jump(5))
+    console.log(jump(6))
+    console.log(jump(8))
+    console.log(jump(10))
+</script>
+</html>

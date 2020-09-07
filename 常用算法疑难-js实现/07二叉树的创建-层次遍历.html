@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>二叉树的创建-层次遍历</title>
+</head>
+<body>
+    
+</body>
+<script>
+    function TreeNode (val) {
+        this.val = val
+        this.left = null
+        this.right = null
+    }
+
+    function craeteTree_levelOrder (levelOrderArr) {
+        //1.找到根节点，将根节点加入到队列(层次遍历结果序列的第一个一定是根节点)
+        let queue = [] //队列
+        let root = null
+        let nodeVal
+        if(levelOrderArr[0] !== undefined) {
+            nodeVal = levelOrderArr.shift()
+            root = new TreeNode(nodeVal)
+            queue.push(root)
+        //2.循环地将队列队首的元素出队，把和出队元素相关的元素加入到队列
+        while(queue.length) {
+           let head = queue.shift()
+           //将左子树加入队列
+           nodeVal = levelOrderArr.shift()
+           if (nodeVal !== '#') {
+               head.left = new TreeNode(nodeVal)
+               queue.push(head.left)
+           }
+           //将右子树加入队列
+           nodeVal = levelOrderArr.shift()
+           if (nodeVal !== '#') {
+               head.right = new TreeNode(nodeVal)
+               queue.push(head.right)
+           }
+
+        }
+        }
+        return root
+
+    }
+    let levelOrderArr = ['a','b','c','d','#','#','e','#','f','#','#','#','#']
+    let tree = craeteTree_levelOrder(levelOrderArr)
+    console.log(tree)
+</script>
+</html>

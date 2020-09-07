@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>变态跳台阶</title>
+</head>
+<body>
+    
+</body>
+<script>
+    //f(n) = f(n-1) + f(n-2) + ......f(2) + f(1) + 1
+    let cache = [,1,2]
+    function jump (n) {
+        if(cache[n] !== undefined) return cache[n]
+        cache[n] = 1
+        for (let i = n-1; i >= 1; i--) {
+            cache[n] += jump(i)
+        }
+        return cache[n]
+    }
+    console.log(jump(10));
+</script>
+</html>

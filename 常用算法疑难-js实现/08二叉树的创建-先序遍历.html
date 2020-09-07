@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>二叉树的创建-先序遍历</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    function TreeNode(val) {
+        this.val = val
+        this.left = null
+        this.right = null
+    }
+
+    function createTree_preOrder(preOrderArr) {
+        let root = null
+        //1.拿到先序序列头部的值
+        if (preOrderArr[0] !== undefined) {
+            let nodeVal = preOrderArr.shift()
+            if (nodeVal != '#') {
+                //2.创建根节点
+                root = new TreeNode(nodeVal)
+                //递归创建左子树
+                root.left = createTree_preOrder(preOrderArr)
+                //递归创建右子树
+                root.right = createTree_preOrder(preOrderArr)
+            }
+        }
+        return root
+    }
+    let preOrderArr = ['a', 'b', 'd', '#', 'f', '#', '#', '#', 'c', '#', 'e', '#', '#']
+    let tree = createTree_preOrder(preOrderArr)
+    console.log(tree)
+</script>
+
+</html>
