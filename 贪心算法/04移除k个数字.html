@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>贪心算法--移除k个数字</title>
+</head>
+<body>
+    
+</body>
+<script>
+    function yichu(nums,k) {
+        let stack = [] //栈
+        let result = [] //存储最终结果
+        for (let i = 0; i < nums.length; i++) {//从最高位循环扫描数字num
+            let num = nums[i] - '0' //转换成整数
+            while (stack.length != 0 && stack[stack.length-1] > num && k > 0) {
+                stack.pop() //弹出栈顶元素  //当栈不空时，栈顶元素大于数num，仍然可以删除数字时while循环继续
+                k--  //次数减1
+            }
+            if (num != 0 || stack.length != 0) {
+                stack.push(num) //将数字num压入栈中
+            }
+        }
+        while (stack.length != 0 && k > 0) { //如果栈不空，且仍然可以删除数字
+            stack.pop()
+            k--
+        }
+        for (let i = 0; i < stack.length; i++) {
+            result.push(stack.pop())
+        }
+        if (result == "") {
+            return null
+        }
+       return result.reverse().join("")
+    }
+
+    console.log(yichu('1432219',3))
+</script>
+</html>

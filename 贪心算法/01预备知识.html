@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>贪心预备知识</title>
+</head>
+<body>
+    
+</body>
+<script>
+    //有面值200,100,20,10,,5,1,支付X元，最少要多少张？
+
+    function zhifu(x) {
+        var mianzhi = [200,100,20,10,5,1]
+        var count = 0
+        for (let i = 0; i < mianzhi.length; i++) {
+            var use = Math.floor(x/mianzhi[i])
+            count += use
+            x -= use * mianzhi[i]
+            console.log("使用面值为" + mianzhi[i]+"的"+use+"张"+",剩余支付金额："+x)
+        }
+        console.log("一共需要使用：" + count + "张")
+    }
+    zhifu(628)
+</script>
+</html>
